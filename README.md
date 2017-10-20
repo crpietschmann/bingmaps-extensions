@@ -8,5 +8,7 @@ You can still download the older VEToolkit stuff for Bing Maps Ajax v6; however 
 ## News
 
 2009-04-08 - Simplovation release open source VEToolkit for Virtual Earth via geowebguru.com
+
 2009-01-27 - VEToolkit: A must have for all Virtual Earth Developers! via Marc Schweigert
+
 2009-01-25 - VEToolkit - Virtual Earth Toolkit v6.2.012509.1053 Released! via Chris Pietschmann
