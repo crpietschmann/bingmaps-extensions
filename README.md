@@ -1,8 +1,11 @@
 # Bing Maps Extensions (formerly VEToolkit)
 
+**FYI, this project was migrated here from Codeplex before it shutdown.**
+
 Bing Maps Extensions is a set of helpers that extend Bing Maps for Enterprise with functionality not implemented directly by the Bing Maps API.
 
 **VEToolkit has been renamed Bing Maps Extensions!**
+
 You can still download the older VEToolkit stuff for Bing Maps Ajax v6; however we are currently working on a new version of the toolit for the new Bing Maps Ajax v7 Control.
 
 ## News
