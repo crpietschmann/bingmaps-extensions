@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title></title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2"></script>
+      
+      <script type="text/javascript" src="../scripts/VEToolkit.Core.js"></script>
+      <script type="text/javascript" src="../scripts/VEToolkit.ContextMenuExtender.js"></script>
+
+      <script type="text/javascript">
+          var map = null;
+
+          var contextMenuExtender = null;
+
+          function GetMap() {
+              map = new VEMap('myMap');
+              map.LoadMap();
+              
+              map.AddShape(new VEShape(VEShapeType.Pushpin, map.GetCenter()));
+
+              /// Create a new ContextMenuExtender and attach it to the VEMap.
+              contextMenuExtender = new VEToolkit.ContextMenuExtender(map);
+
+
+              /// When the ContextMenuProvider's are evaluated to determine which one to show when the user
+              /// right clicks on the map control, they are processed in the order they are added. Also, thier
+              /// "IsMatch" method is what is used to determine if that ContextMenuProvider should be used.
+              
+              /// Clear any "default" or existing providers
+              contextMenuExtender.ClearProviders();
+              /// Add a "custom" provider as defined in the code below
+              contextMenuExtender.AddProvider(new CustomShapeMenuProvider());
+              /// Add the "default" provider
+              contextMenuExtender.AddProvider(new VEToolkit.DefaultContextMenuProvider());
+          }
+
+
+          /// Create a custom ContextMenuProvider that inherits from VEToolkit.DefaultContextMenuProvider
+          CustomShapeMenuProvider = function() {
+            /// Add some custom menu items to list after the menu items that VEToolkit.DefaultContextMenuProvider already has
+              this.Options[this.Options.length] = { Text: "-" };
+              this.Options[this.Options.length] = { Text: "Pushpin" };
+              this.Options[this.Options.length] = { Text: function(map, e) { return "Element ID: " + e.elementID; }, Action: null };
+              this.Options[this.Options.length] = { Text: "Zoom Here", Action: function(map, e) { var shape = map.GetShapeByID(e.elementID); map.SetCenterAndZoom(shape.GetPoints()[0], 13); } };
+          };
+          /// Inherit from the VEToolkit.DefaultContextMenuProvider
+          CustomShapeMenuProvider.prototype = new VEToolkit.DefaultContextMenuProvider;
+          /// Override the IsMatch method. This is used to determine if this ContextMenuProvider should be used.
+          CustomShapeMenuProvider.prototype.IsMatch = function(map, e) {
+              /// Check that the user clicked on a Shape
+              return (e.elementID != null);
+          };
+      </script>
+      <style type="text/css">
+        .VEToolkit_ContextMenu 
+        {
+        	list-style-type: none;
+            background-color: White;
+            padding: 4px;
+            border: solid 1px black;
+            margin: 0px;
+        }
+        .VEToolkit_ContextMenu li.VEToolkit_ContextMenu_Seperator
+        {
+        	border-bottom: solid 1px black;
+        	padding: 0px;
+        	margin: 0px;
+        }
+      </style>
+      <!--[if lte IE 7]>
+      <style type="text/css">
+        .VEToolkit_ContextMenu li.VEToolkit_ContextMenu_Seperator
+        {
+        	margin-top: -15px;
+        }
+      </style>
+      <![endif]-->
+   </head>
+   <body onload="GetMap();">
+   
+    <h1>VEToolkit.ContextMenuExtender</h1>
+    <p>Just right click on the map to see the context menu. This sample shows a different context menu when you click on a shape then when you click on the plain map.</p>
+   
+      <div id='myMap' style="position:relative; width:400px; height:400px;"></div>
+
+   </body>
+</html>
+

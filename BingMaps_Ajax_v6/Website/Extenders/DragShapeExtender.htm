@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title></title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2"></script>
+      
+      <script type="text/javascript" src="../scripts/VEToolkit.Core.js"></script>
+      <script type="text/javascript" src="../scripts/VEToolkit.DragShapeExtender.js"></script>
+
+      <script type="text/javascript">
+          var map = null;
+
+          var dragShapeExtender = null;
+          
+          function GetMap() {
+              map = new VEMap('myMap');
+              map.LoadMap();
+              map.SetZoomLevel(9);
+
+              var mapCenter = map.GetCenter();
+              
+              // Plot Pushpin
+              var s = new VEShape(VEShapeType.Pushpin, new VELatLong(mapCenter.Latitude + .25, mapCenter.Longitude + .25));
+              s.SetTitle("Pushpin");
+              map.AddShape(s);
+              
+              // Plot Polygon
+              var points = [
+                    new VELatLong(mapCenter.Latitude, mapCenter.Longitude - 0.15),
+                    new VELatLong(mapCenter.Latitude + 0.1, mapCenter.Longitude - 0.05),
+                    new VELatLong(mapCenter.Latitude + 0.1, mapCenter.Longitude + 0.05),
+                    new VELatLong(mapCenter.Latitude, mapCenter.Longitude + 0.15),
+                    new VELatLong(mapCenter.Latitude - 0.1, mapCenter.Longitude + 0.05),
+                    new VELatLong(mapCenter.Latitude - 0.1, mapCenter.Longitude - 0.05)
+                ];
+
+              s = new VEShape(VEShapeType.Polygon, points);
+              s.SetLineWidth(1);
+              s.SetLineColor(new VEColor(0, 0, 0, 1.0));
+              s.SetFillColor(new VEColor(0, 100, 150, 0.5));
+              s.SetTitle('Draggable Polygon');
+              s.SetDescription('Hold down the right mouse button to drag me.');
+              s.HideIcon();
+              map.AddShape(s);
+
+
+
+              // By default you are allowed to drag by holding down the Right mouse button
+              // All shapes are draggable also
+              dragShapeExtender = new VEToolkit.DragShapeExtender(map);
+
+              // Lets enable dragging by the Left mouse button too
+              dragShapeExtender.DragLeftMouseButton = true;
+              // dragShapeExtender.DragRightMouseButton = false; //<-- disable draggin when Right mouse button held down
+
+
+              // Override logic that determines if the shape is draggable
+              // Be default all Shapes are draggable, if you don't override this method
+              // This gets passed the VE Map Event Arguments that a normally passed the onmousedown and onmouseup Map Events
+              dragShapeExtender.IsDraggable = function(map, e) {
+                  // return (e.elementID && map.GetShapeByID(e.elementID).GetShapeType() == VEShapeType.Pushpin); // <-- This restricts to only allowing Pushpins to be dragged.
+
+                  if (e.elementID != null) {
+                      var shape = map.GetShapeByID(e.elementID);
+                      if (shape != null) {
+                          // Determine what Shape Type is Draggable depending on the Checkbox's on the Page
+                          if (shape.GetType() === VEShapeType.Pushpin) {
+                              var cbPushpinDraggable = document.getElementById("cbPushpinDraggable");
+                              return (cbPushpinDraggable.checked === true);
+                          }
+                          else if (shape.GetType() === VEShapeType.Polygon) {
+                              var cbPolygonDraggable = document.getElementById("cbPolygonDraggable");
+                              return (cbPolygonDraggable.checked === true);
+                          }
+                      }
+                  }
+
+                  return false;
+              };
+
+
+              // Attach Event Handlers
+              dragShapeExtender.attachEvent("ondragstart", dragShapeExtender_DragStart);
+              dragShapeExtender.attachEvent("ondragend", dragShapeExtender_DragEnd);
+          }
+
+          function dragShapeExtender_DragStart(sender, e) {
+              // Gets fired when the user starts dragging a Shape
+              var map = e.Map;
+              var shape = e.Shape;
+
+              document.getElementById("txtEventMessages").value += "ondragstart: " + shape.GetID() + "\n";
+          }
+
+          function dragShapeExtender_DragEnd(sender, e) {
+              // Gets fired when the user stops dragging a Shape
+              var map = e.Map;
+              var shape = e.Shape;
+
+              document.getElementById("txtEventMessages").value += "ondragend: " + shape.GetID() + "\n";
+          }
+      </script>
+   </head>
+   <body onload="GetMap();">
+    <h1>VEToolkit.DragShapeExtender</h1>
+    
+    <table>
+        <tr>
+            <td>
+                <div id='myMap' style="position:relative; width:400px; height:400px;"></div>        
+            </td>
+            <td valign="top">
+                Shape Types that are Draggable:<br />
+                <input type="checkbox" id="cbPushpinDraggable" title="Pushpin" checked="checked" /><label for="cbPushpinDraggable">Pushpin</label><br />
+                <input type="checkbox" id="cbPolygonDraggable" title="Polygon" checked="checked" /><label for="cbPolygonDraggable">Polygon</label><br />
+                
+                <hr />
+                
+                <textarea id="txtEventMessages" cols="35" rows="10"></textarea>
+            </td>
+        </tr>
+    </table>
+
+   </body>
+</html>
+

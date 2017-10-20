@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title>VEToolkit.Drawing.DrawCircle Sample</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2"></script>
+      
+      <script type="text/javascript" src="../../scripts/VEToolkit.Core.js"></script>
+      
+      <script type="text/javascript">
+          var map = null;
+         
+          function GetMap() {
+              map = new VEMap('myMap');
+              map.LoadMap();
+
+              var points = VEToolkit.Drawing.DrawCircle(map.GetCenter(), 500.0, VEToolkit.Math.EarthRadius.Miles); /// <-- 500 Miles
+              ///var points = VEToolkit.Drawing.DrawCircle(map.GetCenter(), 500.0, VEToolkit.Math.EarthRadius.Kilometers); /// <-- 500 Kilometers
+
+              var s = new VEShape(VEShapeType.Polyline, points);
+              map.AddShape(s);
+          }   
+      </script>
+   </head>
+   <body onload="GetMap();">
+   
+    <h1>VEToolkit.Drawing.DrawCircle</h1>
+   
+    <div id='myMap' style="position:relative; width:400px; height:400px;"></div>
+
+   </body>
+</html>
+

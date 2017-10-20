@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title>VEToolkit.LoadAPI Sample</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2"></script>
+      
+      <script type="text/javascript" src="../scripts/VEToolkit.Core.js"></script>
+      
+      <script type="text/javascript">
+          var map = null;
+
+          function LoadMapOnDemand() {
+              // Disabled the Load Button
+              document.getElementById("btnLoadAPI").disabled = true;
+              
+              // Load the VE API and tell it what method to call once it's loaded
+              VEToolkit.LoadAPI("GetMap");
+              //VEToolkit.LoadAPI("GetMap", true); //<-- This will load the VE API using SSL
+          }
+
+          function GetMap() {
+              // Initialize the Map
+              map = new VEMap('myMap');
+              map.onLoadMap = MapLoaded;
+              map.LoadMap();
+          }
+
+          function MapLoaded() {
+              // Once the VEMap has finished loading,
+              // then plot a Pushpin
+              var s = new VEShape(VEShapeType.Pushpin, map.GetCenter());
+              map.AddShape(s);
+          }
+      </script>
+   </head>
+   <body>
+   
+    <h1>VEToolkit.LoadAPI</h1>
+    <p>This method allows you to load the Virtual Earth API on demand, anytime after the initial page load. Click the button below to load the map.</p>
+    <input type="button" id="btnLoadAPI" value="Load Map API" onclick="LoadMapOnDemand();" />
+    <br />
+    <div id='myMap' style="position:relative; width:400px; height:400px;"></div>
+
+   </body>
+</html>
+

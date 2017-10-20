@@ -1,0 +1,45 @@
+﻿<!--
+/* Bing Maps Extensions v7 Alpha - http://bingmapsextensions.codeplex.com
+ * Copyright (c) 2011 Chris Pietschmann (http://pietschsoft.com). All Rights Reserved.
+ * This project is licensed under the Microsoft Public License (Ms-PL)
+ * This license can be found here: http://bingmapsextensions.codeplex.com/license
+*/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Bing Maps Extensions</title>
+    <script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0" type="text/javascript" charset="UTF-8"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.4.4.min.js"></script>
+
+    <script src="Scripts/BingMapsExt.js"></script>
+</head>
+<body>
+<h1>Bing Maps Extensions v7</h1>
+
+<h2>Requirements</h2>
+<p>The project has the following requirements:</p>
+<ul>
+    <li><a href="http://www.microsoft.com/maps/developers/web.aspx">Bing Maps Ajax Control v7</a></li>
+    <li><a href="http://jquery.com">jQuery</a></li>
+</ul>
+
+<div id="myMap" style="position: relative; width: 800px; height: 600px;"></div>
+<script>
+    var map = new Microsoft.Maps.Map($('#myMap')[0], {
+        credentials: "Bing Maps Key",
+        center: new Microsoft.Maps.Location(0, 0),
+        zoom: 4
+    });
+
+    var locs = BingMapsExt.Circle(new Microsoft.Maps.Location(0, 0), 1000, BingMapsExt.EarthRadius.Miles);
+    var pin = new Microsoft.Maps.Polygon(locs);
+    map.entities.push(pin);
+
+    // alert(BingMapsExt.Distance(new Microsoft.Maps.Location(0, 0), locs[0], BingMapsExt.EarthRadius.Miles)); // return: 1000
+    // alert(BingMapsExt.IsInPolygon(new Microsoft.Maps.Location(1, 1), locs)); // returns True
+    // alert(BingMapsExt.IsInPolygon(new Microsoft.Maps.Location(74, 46), locs)); // returns False
+</script>
+</body>
+</html>

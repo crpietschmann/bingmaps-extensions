@@ -1,0 +1,41 @@
+﻿<!--
+/* Bing Maps Extensions v7 Alpha - http://bingmapsextensions.codeplex.com
+ * Copyright (c) 2011 Chris Pietschmann (http://pietschsoft.com). All Rights Reserved.
+ * This project is licensed under the Microsoft Public License (Ms-PL)
+ * This license can be found here: http://bingmapsextensions.codeplex.com/license
+*/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bing Maps Extensions</title>
+    <!--script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0" type="text/javascript" charset="UTF-8"></script-->
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<h1>Bing Maps Extensions v7</h1>
+
+<div id="myMap" style="position: relative; width: 530px; height: 300px;"></div>
+<input type="button" value="Create Map" onclick="createMap();" />
+<script>
+    function createMap() {
+        // Currently, the Bing Maps v7 doesn't work correctly with this. :(
+        var apiScript = "http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&onScriptLoad=loadMap";
+        var elem = document.createElement("script");
+        elem.type = "text/javascript";
+        elem.src = apiScript;
+        document.appendChild(elem);
+    }
+
+    function loadMap() {
+        var me = $('#myMap')[0];
+        var map = new Microsoft.Maps.Map(me, {
+            credentials: "Bing Maps Key",
+            center: new Microsoft.Maps.Location(43, -87.9),
+            zoom: 9
+        });
+    }
+</script>
+
+</body>
+</html>

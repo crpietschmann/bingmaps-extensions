@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title>VEToolkit.Math.CalculateDistance Sample</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2"></script>
+      
+      <script type="text/javascript" src="../../scripts/VEToolkit.Core.js"></script>
+      
+      <script type="text/javascript">
+          var map = null;
+          
+          function GetMap() {
+              map = new VEMap('myMap');
+              map.LoadMap();
+
+              /// Plot Polyline
+              var points = [
+                    new VELatLong(43.64486433588385, -79.3791389465332),
+                    new VELatLong(43.64508171979899, -79.3930435180664)
+                ];
+
+              var polyline = new VEShape(VEShapeType.Polyline, points);
+              polyline.HideIcon();
+              map.AddShape(polyline);
+              map.SetMapView(points);
+
+              // Calculate distance of Polyline and display on page
+              var distance = VEToolkit.Math.CalculateDistance(points[0], points[1], VEToolkit.Math.EarthRadius.Miles);
+              document.getElementById("lblMiles").innerHTML = distance;
+
+              var distance = VEToolkit.Math.CalculateDistance(points[0], points[1], VEToolkit.Math.EarthRadius.Kilometers);
+              document.getElementById("lblKilometers").innerHTML = distance;
+          }
+      </script>
+   </head>
+   <body onload="GetMap();">
+    <h1>VEToolkit.Math.CalculateDistance</h1>
+    Distance in Miles: <strong><span id="lblMiles"></span></strong><br />
+    Distance in Kilometers: <strong><span id="lblKilometers"></span></strong><br />
+    <div id='myMap' style="position:relative; width:400px; height:400px;"></div>
+
+   </body>
+</html>
+

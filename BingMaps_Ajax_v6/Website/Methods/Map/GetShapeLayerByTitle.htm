@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title>VEToolkit.Map.GetShapeLayerByTitle Sample</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2"></script>
+      <script type="text/javascript" src="../../scripts/VEToolkit.Core.js"></script>
+      
+      <script type="text/javascript">
+          var map = null;
+         
+          function GetMap() {
+              map = new VEMap('myMap');
+              map.LoadMap();
+
+              // Add a new ShapeLayer named "MyShapeLayer"
+              var sl = new VEShapeLayer();
+              sl.SetTitle("MyShapeLayer");
+              sl.AddShape(new VEShape(VEShapeType.Pushpin, map.GetCenter()));
+              map.AddShapeLayer(sl);
+          }
+
+          function btnShowShapeLayer_Click() {
+              var sl = VEToolkit.Map.GetShapeLayerByTitle(map, "MyShapeLayer");
+              sl.Show();
+          }
+          function btnHideShapeLayer_Click() {
+              var sl = VEToolkit.Map.GetShapeLayerByTitle(map, "MyShapeLayer");
+              sl.Hide();
+          }
+      </script>
+   </head>
+   <body onload="GetMap();">
+   
+    <h1>VEToolkit.Map.GetShapeLayerByTitle</h1>
+    
+    <input type="button" id="btnShowShapeLayer" value="Show ShapeLayer" onclick="btnShowShapeLayer_Click();" />&nbsp;&nbsp;
+    <input type="button" id="btnHideShapeLayer" value="Hide ShapeLayer" onclick="btnHideShapeLayer_Click();" /><br />
+   
+    <div id='myMap' style="position:relative; width:400px; height:400px;"></div>
+
+   </body>
+</html>
+

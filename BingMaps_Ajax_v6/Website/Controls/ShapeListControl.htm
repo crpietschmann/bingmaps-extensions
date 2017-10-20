@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title>VEToolkit.MiniMapExtender Sample</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2"></script>
+      
+      <script type="text/javascript" src="../scripts/VEToolkit.Core.js"></script>
+      <script type="text/javascript" src="../scripts/VEToolkit.ShapeListControl.js"></script>
+      
+      <script type="text/javascript">
+          var map = null;
+
+          var shapeListControl = null;
+
+          function GetMap() {
+              // Initialize the VEMap
+              map = new VEMap('myMap');
+              map.LoadMap();
+
+              // Add some Pushpins to the map
+              var s = null;
+              var center = map.GetCenter();
+
+              s = new VEShape(VEShapeType.Pushpin, new VELatLong(center.Latitude - 3, center.Longitude));
+              s.SetTitle("Shape 1");
+              s.SetDescription("The First Point");
+              map.AddShape(s);
+
+              s = new VEShape(VEShapeType.Pushpin, center);
+              s.SetTitle("Shape 2");
+              s.SetDescription("The Second Point");
+              map.AddShape(s);
+
+              s = new VEShape(VEShapeType.Pushpin, new VELatLong(center.Latitude + 3, center.Longitude));
+              s.SetTitle("Shape 3");
+              s.SetDescription("The Third Point");
+              map.AddShape(s);
+              
+
+              // Attach a new ShapeListControl to the Map and Div
+              shapeListControl = new VEToolkit.ShapeListControl(map, "mySidebar");
+
+              // Attach custom ShapeListControl Event Handlers
+              shapeListControl.attachEvent("onclick", shapeListControl_Click);
+              shapeListControl.attachEvent("onmouseover", shapeListControl_MouseOver);
+              shapeListControl.attachEvent("onmouseout", shapeListControl_MouseOut);
+          }
+
+          function shapeListControl_Click(sender, e) {
+              // sender is the ShapeListControl that is raising the event
+              // e is an instance of VEToolkit.ShapeListControlEventArgs
+              var map = e.Map;
+              var shape = e.Shape;
+              var div = e.Element;
+              var mapEventObject = e.MapEvent;
+
+              if (mapEventObject == null) {
+                  // The user clicked the item in the List
+                
+                  // Hide any currently shown InfoBox
+                  map.HideInfoBox();
+
+                  // Show the Shape's InfoBox
+                  map.ShowInfoBox(shape);
+              }
+              else {
+                  // The user clicked the Shape on the Map
+              }
+          }
+
+          function shapeListControl_MouseOver(sender, e) {
+              var map = e.Map;
+              var shape = e.Shape;
+              var div = e.Element;
+              var mapEventObject = e.MapEvent;
+
+              div.className = "VEToolkit_ShapeListControl_Shape_Highlight";
+          }
+
+          function shapeListControl_MouseOut(sender, e) {
+              var map = e.Map;
+              var shape = e.Shape;
+              var div = e.Element;
+              var mapEventObject = e.MapEvent;
+
+              div.className = "VEToolkit_ShapeListControl_Shape";
+          }
+      </script>
+      
+      <style type="text/css">
+        .VEToolkit_ShapeListControl_Shape
+        {
+        	margin-bottom: 5px;
+        	padding: 1px;
+        }
+        .VEToolkit_ShapeListControl_ShapeTitle
+        {
+        	font-weight: bold;
+        	clear: right;
+        }
+        .VEToolkit_ShapeListControl_ShapeDesc 
+        {
+        }
+        
+        .VEToolkit_ShapeListControl_Shape_Highlight
+        {
+        	border: solid 1px red;
+        }
+      </style>
+   </head>
+   <body onload="GetMap();">
+
+    <h1>VEToolkit.ShapeListControl</h1>
+    
+    <p>Click on the Item on the Left of the Map and the corresponding Shape's InfoBox will be shown.<br />
+    Also, if you hover over the Shape on the Map, the corresponding Item in the List will be highlighted.
+    </p>
+    
+    <table>
+        <tr>
+            <td valign="top">
+                <div id='mySidebar'></div>
+            </td>
+            <td valign="top">
+                <div id='myMap' style="position:relative; width:400px; height:400px;"></div>
+            </td>
+        </tr>
+    </table>
+
+   </body>
+</html>
+

@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title>VEToolkit.MiniMapExtender Sample</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2"></script>
+      
+      <script type="text/javascript" src="../scripts/VEToolkit.Core.js"></script>
+      <script type="text/javascript" src="../scripts/VEToolkit.MiniMapExtender.js"></script>
+      
+      <script type="text/javascript">
+          var map = null;
+
+          var miniMapExtender = null;
+          
+          function GetMap() {
+              map = new VEMap('myMap');
+              map.LoadMap();
+
+              // Once the VEMap in Loaded, now we can initialize out MiniMapExtender
+              miniMapExtender = new VEToolkit.MiniMapExtender(map);
+              miniMapExtender.Show(); // <-- Show the MiniMap
+
+              // miniMapExtender.SetVerticalOffset(10); // <-- Offset/Space the Mini Map from the Top or Bottom of the VEMap
+              // miniMapExtender.SetHorizontalOffset(50); // <-- Offset/Space the Mini Map from the Left or Right of the VEMap
+          }   
+      </script>
+   </head>
+   <body onload="GetMap();">
+
+    <h1>VEToolkit.MiniMapExtender</h1>
+   <p>Extends Virtual Earth with easier to use functionality to manipulate/control the Mini Map.</p>
+    <table>
+        <tr>
+            <td>
+                <input type="button" value="Large Map" onclick="map.Resize(600, 600);" />
+                &nbsp;
+                <input type="button" value="Small Map" onclick="map.Resize(400, 400);" />
+                <br />
+       
+                <div id='myMap' style="position:relative; width:400px; height:400px;"></div>
+                
+            </td>
+            <td valign="top">
+            
+              Mini Map:
+              &nbsp;
+              <input type="button" value="Hide" onclick="miniMapExtender.Hide();" />
+              &nbsp;
+              <input type="button" value="Show" onclick="miniMapExtender.Show();" />
+              
+              <br />
+              Size:
+              &nbsp;
+              <input type="button" value="Small" onclick="miniMapExtender.SetMiniMapSize(VEMiniMapSize.Small);" />
+              &nbsp;
+              <input type="button" value="Large" onclick="miniMapExtender.SetMiniMapSize(VEMiniMapSize.Large);" />
+              
+              <hr />
+              Vertical Alignment:
+              &nbsp;
+              <input type="button" value="Top" onclick="miniMapExtender.SetVerticalAlignment(VEToolkit.MiniMapVerticalAlignment.Top);" />
+              &nbsp;
+              <input type="button" value="Middle" onclick="miniMapExtender.SetVerticalAlignment(VEToolkit.MiniMapVerticalAlignment.Middle);" />
+              &nbsp;
+              <input type="button" value="Bottom" onclick="miniMapExtender.SetVerticalAlignment(VEToolkit.MiniMapVerticalAlignment.Bottom);" />
+              
+              <br />
+              Vertical Offset:
+              &nbsp;
+              <input type="button" value="0px" onclick="miniMapExtender.SetVerticalOffset(0);" />
+              &nbsp;
+              <input type="button" value="10px" onclick="miniMapExtender.SetVerticalOffset(10);" />
+              &nbsp;
+              <input type="button" value="20px" onclick="miniMapExtender.SetVerticalOffset(20);" />
+              &nbsp;
+              <input type="button" value="30px" onclick="miniMapExtender.SetVerticalOffset(30);" />
+              
+              <hr />
+              Horizontal Alignment:
+              &nbsp;
+              <input type="button" value="Left" onclick="miniMapExtender.SetHorizontalAlignment(VEToolkit.MiniMapHorizontalAlignment.Left);" />
+              &nbsp;
+              <input type="button" value="Center" onclick="miniMapExtender.SetHorizontalAlignment(VEToolkit.MiniMapHorizontalAlignment.Center);" />
+              &nbsp;
+              <input type="button" value="Right" onclick="miniMapExtender.SetHorizontalAlignment(VEToolkit.MiniMapHorizontalAlignment.Right);" />
+              
+              <br />
+              Horizontal Offset:
+              &nbsp;
+              <input type="button" value="0px" onclick="miniMapExtender.SetHorizontalOffset(0);" />
+              &nbsp;
+              <input type="button" value="10px" onclick="miniMapExtender.SetHorizontalOffset(10);" />
+              &nbsp;
+              <input type="button" value="20px" onclick="miniMapExtender.SetHorizontalOffset(20);" />
+              &nbsp;
+              <input type="button" value="30px" onclick="miniMapExtender.SetHorizontalOffset(30);" />
+      
+              
+              <hr />
+              MiniMap Resizer:
+              &nbsp;
+              <input type="button" value="Show" onclick="miniMapExtender.ShowResizer();" />
+              &nbsp;
+              <input type="button" value="Hide" onclick="miniMapExtender.HideResizer();" />
+            
+            </td>
+        </tr>
+    </table>
+
+   </body>
+</html>
+

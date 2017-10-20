@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title>VEToolkit.Map.GetCenter Sample</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2"></script>
+      
+      <script type="text/javascript" src="../../scripts/VEToolkit.Core.js"></script>
+      
+      <script type="text/javascript">
+          var map = null;
+         
+          function GetMap() {
+              map = new VEMap('myMap');
+              map.LoadMap();
+          }
+
+          function btnGetCenter_Click() {
+              var latlng = VEToolkit.Map.GetCenter(map);
+              document.getElementById("lblLatitude").innerHTML = latlng.Latitude;
+              document.getElementById("lblLongitude").innerHTML = latlng.Longitude;
+          }
+      </script>
+   </head>
+   <body onload="GetMap();">
+   
+    <h1>VEToolkit.Map.GetCenter</h1>
+    
+    <input type="button" id="btnGetCenter" value="GetCenter" onclick="btnGetCenter_Click();" /><br />
+    Latitude:&nbsp;<span id="lblLatitude"></span><br />
+    Longitude:&nbsp;<span id="lblLongitude"></span><br />
+    
+    <div id='myMap' style="position:relative; width:400px; height:400px;"></div>
+
+   </body>
+</html>
+

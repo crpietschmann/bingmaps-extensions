@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title>VEToolkit.Map.IsShapeInLayer and IsShapeInLayers Sample</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2"></script>
+      <script type="text/javascript" src="../../scripts/VEToolkit.Core.js"></script>
+      
+      <script type="text/javascript">
+          var map = null;
+          var shape = null;
+          
+          function GetMap() {
+              map = new VEMap('myMap');
+              map.LoadMap();
+
+              // Create new ShapeLayer named "MyShapeLayer"
+              var sl = new VEShapeLayer();
+              sl.SetTitle("MyShapeLayer");
+
+              // Add Shape to layer
+              shape = new VEShape(VEShapeType.Pushpin, map.GetCenter());
+              sl.AddShape(shape);
+                            
+              // Add ShapeLayer top Map
+              map.AddShapeLayer(sl);
+          }
+
+          function btnIsShapeInLayer_Click() {
+              var shapeLayer = VEToolkit.Map.GetShapeLayerByTitle(map, "MyShapeLayer");
+
+              if (VEToolkit.Map.IsShapeInLayer(shape.GetID(), shapeLayer)) {
+                  alert("Yes");
+              }
+              else {
+                  alert("No");
+              }
+          }
+
+          function btnIsShapeInLayers_Click() {
+              // Get all Shape Layers and place them in an Array
+              var shapeLayerArray = [];
+              var i = 0;
+              for(i = 0; i < map.GetShapeLayerCount(); i++){
+                  shapeLayerArray[shapeLayerArray.length] = map.GetShapeLayerByIndex(i);
+              }
+
+              if (VEToolkit.Map.IsShapeInLayers(shape.GetID(), shapeLayerArray)) {
+                  alert("Yes");
+              }
+              else {
+                  alert("No");
+              }
+          }
+      </script>
+   </head>
+   <body onload="GetMap();">
+   
+    <h1>VEToolkit.Map.IsShapeInLayer and IsShapeInLayers</h1>
+    
+    <input type="button" id="btnIsShapeInLayer" value="Check IsShapeInLayer" onclick="btnIsShapeInLayer_Click();" />&nbsp;&nbsp;
+    <input type="button" id="btnIsShapeInLayers" value="Check IsShapeInLayers" onclick="btnIsShapeInLayers_Click();" /><br />
+   
+    <div id='myMap' style="position:relative; width:400px; height:400px;"></div>
+
+   </body>
+</html>
+

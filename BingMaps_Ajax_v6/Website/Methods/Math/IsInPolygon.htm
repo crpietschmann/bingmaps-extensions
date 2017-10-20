@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title>VEToolkit.Math.IsInPolygon Sample</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2"></script>
+      
+      <script type="text/javascript" src="../../scripts/VEToolkit.Core.js"></script>
+      
+      <script type="text/javascript">
+          var map = null;
+          var polygon = null;
+          
+          function GetMap() {
+              map = new VEMap('myMap');
+              map.LoadMap();
+
+              /// Plot Polygon
+              var points = [
+                    new VELatLong(43.64486433588385, -79.3791389465332),
+                    new VELatLong(43.64508171979899, -79.3930435180664),
+                    new VELatLong(43.63682057801007, -79.38437461853027),
+                    new VELatLong(43.63946054004705, -79.36819553375244),
+                    new VELatLong(43.652720712083266, -79.37201499938965),
+                    new VELatLong(43.65793702655821, -79.39111232757568),
+                    new VELatLong(43.64927396999741, -79.37222957611084),
+                    new VELatLong(43.64486433588385, -79.3791389465332)
+                ];
+
+              polygon = new VEShape(VEShapeType.Polygon, points);
+              polygon.HideIcon();
+              map.AddShape(polygon);
+              map.SetMapView(points);
+
+              /// Add onclick handler
+              map.AttachEvent("onclick", map_click);
+          }
+
+          function map_click(eventArgs) {
+              var latlong = map.PixelToLatLong(new VEPixel(eventArgs.mapX, eventArgs.mapY));
+              alert("Is Point Within Polyline:\n" + VEToolkit.Math.IsInPolygon(latlong, polygon.GetPoints()));
+          }
+      </script>
+   </head>
+   <body onload="GetMap();">
+    <h1>VEToolkit.Math.IsInPolygon</h1>
+    <p>Just click on the map, and a message box will popup telling you (true or false) whether to click within the polygon that is plotted.</p>
+    <div id='myMap' style="position:relative; width:400px; height:400px;"></div>
+
+   </body>
+</html>
+

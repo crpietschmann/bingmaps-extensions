@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title>VEToolkit.Math.CalculateInverseCoordinate Sample</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2"></script>
+      
+      <script type="text/javascript" src="../../scripts/VEToolkit.Core.js"></script>
+      
+      <script type="text/javascript">
+          var map = null;
+          
+          function GetMap() {
+              map = new VEMap('myMap');
+              map.LoadMap();
+
+              var point = new VELatLong(43.64486433588385, -79.3791389465332);
+
+              // Plot Original Pushpin
+              var pushpin = new VEShape(VEShapeType.Pushpin, point);
+              pushpin.SetTitle("Original");
+              map.AddShape(pushpin);
+
+              // Calculate and Plot the Inverse Pushpin
+              var inversePoint = VEToolkit.Math.CalculateInverseCoordinate(point);
+              pushpin = new VEShape(VEShapeType.Pushpin, inversePoint);
+              pushpin.SetTitle("Inverse");
+              map.AddShape(pushpin);
+              
+              // Move the Map so both Pushpins are clearly in view
+              map.SetMapView([point, inversePoint]);
+          }
+      </script>
+   </head>
+   <body onload="GetMap();">
+    <h1>VEToolkit.Math.CalculateInverseCoordinate</h1>
+    <p>This method gets the inverse coordinate for the given VELatLong coordinate. Basically, this is the point on the exact opposite side of the Earth.</p>
+    <div id='myMap' style="position:relative; width:400px; height:400px;"></div>
+
+   </body>
+</html>
+

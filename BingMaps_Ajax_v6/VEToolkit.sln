@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Website", "Website", "{55CD9AA1-3F2F-4858-9C02-DF44291C541B}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		TargetFramework = "3.5"
+		Debug.AspNetCompiler.VirtualPath = "/Website"
+		Debug.AspNetCompiler.PhysicalPath = "Website\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Website\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/Website"
+		Release.AspNetCompiler.PhysicalPath = "Website\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Website\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "9251"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "jQueryPlugin", "jQueryPlugin", "{7A199567-F142-46C1-B4A2-EC4972ACED70}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		TargetFramework = "2.0"
+		Debug.AspNetCompiler.VirtualPath = "/jQueryPlugin"
+		Debug.AspNetCompiler.PhysicalPath = "jQueryPlugin\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\jQueryPlugin\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/jQueryPlugin"
+		Release.AspNetCompiler.PhysicalPath = "jQueryPlugin\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\jQueryPlugin\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "13027"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEToolkit.Web.MVC.Website", "VEToolkit.Web.MVC.Website\VEToolkit.Web.MVC.Website.csproj", "{6ADA3015-588C-4FE7-A2E7-F9FB696D41DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEToolkit.Web.MVC", "VEToolkit.Web.MVC\VEToolkit.Web.MVC.csproj", "{88AF5CC3-B175-469A-8CC1-09C013F046B3}"
+EndProject
+Global
+	
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55CD9AA1-3F2F-4858-9C02-DF44291C541B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55CD9AA1-3F2F-4858-9C02-DF44291C541B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55CD9AA1-3F2F-4858-9C02-DF44291C541B}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{55CD9AA1-3F2F-4858-9C02-DF44291C541B}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{7A199567-F142-46C1-B4A2-EC4972ACED70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A199567-F142-46C1-B4A2-EC4972ACED70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A199567-F142-46C1-B4A2-EC4972ACED70}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A199567-F142-46C1-B4A2-EC4972ACED70}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{6ADA3015-588C-4FE7-A2E7-F9FB696D41DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ADA3015-588C-4FE7-A2E7-F9FB696D41DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ADA3015-588C-4FE7-A2E7-F9FB696D41DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ADA3015-588C-4FE7-A2E7-F9FB696D41DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88AF5CC3-B175-469A-8CC1-09C013F046B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88AF5CC3-B175-469A-8CC1-09C013F046B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88AF5CC3-B175-469A-8CC1-09C013F046B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88AF5CC3-B175-469A-8CC1-09C013F046B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
